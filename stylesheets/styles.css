@@ -55,6 +55,7 @@ details,
 figcaption,
 figure,
 footer,
+menujeff,
 header,
 hgroup,
 nav,
@@ -851,13 +852,23 @@ nav ul a:hover {
 }
 
 footer {
-  width: 180px;
+  width: 220px;
   position: fixed;
   left: 50%;
   margin-left: -530px;
   bottom: 20px;
-  text-align: right;
+  text-align: left;
   line-height: 16px;
+}
+
+menujeff {
+  width: 220px;
+  position: fixed;
+  left: 50%;
+  margin-left: -530px;
+  top: 180px;
+  text-align: left;
+  line-height: 10px;
 }
 
 @media print, screen and (max-width: 1060px) {
@@ -870,10 +881,10 @@ footer {
     display: none;
   }
 
-  header, section, footer {
+  header, section, footer, menujeff {
     float: none;
   }
-  header h1, section h1, footer h1 {
+  header h1, section h1, footer h1, menujeff h1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -905,6 +916,14 @@ footer {
     position: relative;
     left: auto;
     bottom: auto;
+    width: auto;
+  }
+  menujeff {
+    text-align: center;
+    margin: 20px auto;
+    position: relative;
+    left: auto;
+    top: auto;
     width: auto;
   }
 }
@@ -993,6 +1012,14 @@ footer {
     bottom: auto;
     width: auto;
   }
+  menujeff {
+    text-align: center;
+    margin: 20px auto;
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+  }
 }
 @media print, screen and (max-height: 480px) {
   nav {
@@ -1005,6 +1032,14 @@ footer {
     position: relative;
     left: auto;
     bottom: auto;
+    width: auto;
+  }
+  menujeff {
+    text-align: center;
+    margin: 20px auto;
+    position: relative;
+    left: auto;
+    top: auto;
     width: auto;
   }
 }
