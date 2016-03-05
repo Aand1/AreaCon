@@ -40,21 +40,62 @@
       </nav>
       <section>
         <h3>
-<a id="About" class="anchor" href="#About" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About AreaCon.</h3>
-
-AreaCon is a free open source C++ library for performing area-constrained partitioning operations on convex, 2D polygonal regions. It is intended primarily for use in robot and mobile sensor network applications in which the workspace is to be divided among the available agents in an optimal way. AreaCon allows the user to specify the final weighted area of each of the resultant regions, thus providing a natural load-balancing that is useful in a variety of static and dynamic coverage applications, as well as a variety of applications that involve optimal division of workload. Specifically, given a prior density defined over a polygonal region of interest, AreaCon provides a numerical implementation of a theoretically rigorous, bio-inspired algorithm that systematically divides the region into a set of disjoint, convex, and centroidal regions with pre-specified areas. The entire library consists of a single compilation unit (one .hpp and one .cpp file), which has dependence on a single free and open source third party library (the <a href="http://www.angusj.com/delphi/clipper.php"> Polygon Clipper Library</a>). It can therefore be seamlessly integrated into larger, more complex planning codes that require simple load-balancing steps without the weight of a larger computational geometry library. 
-<br>
-<br>
-<strong> AreaCon v.1</strong> provides the following on planar, convex polygonal environments:
-<ul>
-  <li>Area-constrained partitioning over arbitrary density functions</li>
-  <li>Centroid computation</li>
-  <li>A variety of useful geometric structures and associated functions</li>
-</ul>
-</p>
+<a id="Primary" class="anchor" href="#Primary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Primary References</h3>
 <p>
-Note that although AreaCon only provides explicit support for convex polygonal environments, it supports arbitrary density functions. Therefore, the library can also be used for partitioning on a much larger class of planar environments by strategically defining regions of zero density. Exact or arbitrary precision arithmetic is avoided for additional robustness in numerical implementation. However, functionality is still somewhat sensitive to a variety of algorithmic parameters (step-sizes, stopping-criteria, integration parameters, etc.). If these parameters are chosen poorly or the scale of the underlying density varies wildly, the library can and will return errors. Despite this, if parameters are chosen properly the library will produce high-quality results for a number of environments and densities. In addition, reasonable results can be obtained for most "regular" workspaces using the provided default parametric values.  
-</p>
+AreaCon is primarily a numerical implementation of the algorithms found in the following:
+
+<pre>
+@article{RP-PF-RB:13,
+  author =	 {R. Patel and P. Frasca and F. Bullo},
+  title =	 {Centroidal Area-Constrained Partitioning for Robotic
+                  Networks},
+  journal =	 {ASME Journal of Dynamic Systems, Measurement, and Control},
+  year =	 2014,
+  volume =	 136,
+  number =	 3,
+  pages =	 031024,
+  keywords =	 {Robotic Networks},
+  abstract =	 {We consider the problem of optimal coverage with
+                  area-constraints in a mobile multi-agent system.
+                  For a planar environment with an associated density
+                  function, this problem is equivalent to dividing the
+                  environment into optimal subregions such that each
+                  agent is responsible for the coverage of its own
+                  region.  In this paper, we design a continuous-time
+                  distributed policy which allows a team of agents to
+                  achieve a convex area-constrained partition of a
+                  convex workspace.  Our work is related to the
+                  classic Lloyd algorithm, and makes use of
+                  generalized Voronoi diagrams.  We also discuss
+                  practical implementation for real mobile networks.
+                  Simulation methods are presented and discussed.},
+}
+
+@InProceedings{RP-PF-FB:13conf,
+  author =	 {R. Patel and P. Frasca and F. Bullo},
+  title =	 {Centroidal area-constrained partitioning for robotic
+                  networks},
+  booktitle =	 {ASME Dynamic Systems and Control Conference},
+  year =	 {2013},
+  month =	 October,
+  address =	 {Stanford, CA, USA},
+  keywords =	 {Robotic Networks},
+}
+</pre>
+
+The algorithms used by AreaCon are also influenced by this work
+<pre>
+@article{JC:10,
+  author =	 {J. Cort{\'e}s},
+  title =	 {Coverage Optimization and Spatial Load Balancing by
+                  Robotic Sensor Networks},
+  journal =	 {IEEE Transactions on Automatic Control},
+  year =	 2010,
+  volume =	 55,
+  number =	 3,
+  pages =	 {749-754}
+}
+</pre>
 
 <h3>
 <a id="Usage" class="anchor" href="#Usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic Usage</h3>
@@ -103,15 +144,15 @@ Collaborative Biotechnologies, and that the content of the information does not 
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
 <menujeff> 
-<h2> <a href="#"> <strong> Home</strong></a></h2>
+<h2> <a href="index.html"> <strong> Home</strong></a></h2>
+<h2> <a href="./Documentation/index.html"> <strong> Documentation</strong></a></h2>
+<h2> <a href="#"> <strong> References</strong></a></h2>
 <ul> <li> <a href = "#About"> About</a></li><br>
 <li> <a href = "#Usage"> Usage</a></li><br>
 <li> <a href = "#Examples"> Examples</a></li><br>
 <li> <a href = "#Authors"> Contributors</a></li><br>
 <li> <a href = "#License"> License</a></li><br>
 <li> <a href = "#Acknowledgments"> Acknowledgements</a></li></ul>
-<h2> <a href="./Documentation/index.html"> <strong> Documentation</strong></a></h2>
-<h2> <a href="References.html"> <strong>References</strong></a></h2>
 <h2> <a href="#"> <strong> Links</strong></a></h2>
 <h2> <a href="https://github.com/jrpeters/AreaCon/wiki"> <strong> Wiki</strong></a></h2>
 <h2> <a href="#"> <strong> FAQ</strong></a></h2>

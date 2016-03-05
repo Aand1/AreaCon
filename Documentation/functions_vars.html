@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -88,16 +95,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
       <li><a href="#index_v"><span>v</span></a></li>
-      <li class="current"><a href="#index_w"><span>w</span></a></li>
+      <li><a href="#index_w"><span>w</span></a></li>
+      <li><a href="#index_x"><span>x</span></a></li>
+      <li class="current"><a href="#index_y"><span>y</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_vars.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -125,6 +148,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>centers_step
 : <a class="el" href="class_area_con_1_1_parameters.html#a42caca06842e74a105b95e38cf54ee78">AreaCon::Parameters</a>
+</li>
+<li>Coefficient_a
+: <a class="el" href="class_area_con_1_1_int___params.html#a829fe8d764f490269475054f400b72bc">AreaCon::Int_Params</a>
+</li>
+<li>Coefficient_b
+: <a class="el" href="class_area_con_1_1_int___params.html#a5185f245c331e894e27e72579fee0e4c">AreaCon::Int_Params</a>
+</li>
+<li>Coefficient_c
+: <a class="el" href="class_area_con_1_1_int___params.html#a0ab7806f97e43d8cf0e6d38ea17abb9f">AreaCon::Int_Params</a>
 </li>
 <li>Coefficient_d
 : <a class="el" href="class_area_con_1_1_int___params.html#ab4a831e2788e10e97fd0b2baaac57d2b">AreaCon::Int_Params</a>
@@ -162,8 +194,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>Int
+: <a class="el" href="class_area_con_1_1_int___params.html#a92ab0f9d7edbc3627e52a57d488b61fd">AreaCon::Int_Params</a>
+</li>
 <li>Integral
 : <a class="el" href="class_area_con_1_1_density.html#a2c0aa917e284b934b397148143bf878f">AreaCon::Density</a>
+</li>
+<li>Intx
+: <a class="el" href="class_area_con_1_1_int___params.html#abab12f8c31b9a776bc9eb5bf204a3bc4">AreaCon::Int_Params</a>
 </li>
 <li>Inty
 : <a class="el" href="class_area_con_1_1_int___params.html#a7a76634a0a39ba05fd5dd166bbf9e5d9">AreaCon::Int_Params</a>
@@ -236,7 +274,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_area_con_1_1_density.html#a0232fb937cbda74f4bb36f782f5ff1f5">AreaCon::Density</a>
 </li>
 <li>Robustness_Constant
-: <a class="el" href="class_area_con_1_1_point.html#ac7762619eb810e63331eff438ee60bff">AreaCon::Point</a>
+: <a class="el" href="class_area_con_1_1_parameters.html#a3e6299dc3088970295387e0b26c1ac8d">AreaCon::Parameters</a>
+, <a class="el" href="class_area_con_1_1_point.html#ac7762619eb810e63331eff438ee60bff">AreaCon::Point</a>
 </li>
 </ul>
 
@@ -257,6 +296,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>Volume_Lower_Bound
 : <a class="el" href="class_area_con_1_1_density.html#a147f4d875de32f34fbe1a853ec377f44">AreaCon::Density</a>
+, <a class="el" href="class_area_con_1_1_parameters.html#ac91b5a511cf3baf2f41863311c6f4f56">AreaCon::Parameters</a>
 </li>
 <li>volume_tolerance
 : <a class="el" href="class_area_con_1_1_parameters.html#ac4e725ed0c1582d2659dfae80db38b92">AreaCon::Parameters</a>
@@ -272,12 +312,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_area_con_1_1_parameters.html#ae6ac2a3c68b3aeed1f027d08310c9004">AreaCon::Parameters</a>
 </li>
 </ul>
+
+
+<h3><a class="anchor" id="index_x"></a>- x -</h3><ul>
+<li>x
+: <a class="el" href="class_area_con_1_1_point.html#a3cc69dfdf7439c1e946ab037fe307bf7">AreaCon::Point</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_y"></a>- y -</h3><ul>
+<li>y
+: <a class="el" href="class_area_con_1_1_point.html#acf0680a9f65e45a8e162e31cc2142ff9">AreaCon::Point</a>
+</li>
+</ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 4 2016 17:02:30 for The AreaCon Library by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Mar 4 2016 18:10:07 for The AreaCon Library by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>
