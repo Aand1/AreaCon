@@ -1,0 +1,74 @@
+[OPTIONS]
+Compatibility=1.1
+Full-text search=Yes
+Contents file=index.hhc
+Default Window=main
+Default topic=index.html
+Index file=index.hhk
+Language=0x409 English (United States)
+Title=The AreaCon Library
+
+[WINDOWS]
+main="The AreaCon Library","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
+
+[FILES]
+areacon_8h_source.html
+areacon_8cpp.html
+namespace_area_con.html
+class_area_con_1_1_point.html
+class_area_con_1_1_point-members.html
+class_area_con_1_1_poly.html
+class_area_con_1_1_poly-members.html
+class_area_con_1_1_mult___array.html
+class_area_con_1_1_mult___array-members.html
+class_area_con_1_1_delaunay_graph.html
+class_area_con_1_1_delaunay_graph-members.html
+class_area_con_1_1_int___params.html
+class_area_con_1_1_int___params-members.html
+class_area_con_1_1_parameters.html
+class_area_con_1_1_parameters-members.html
+class_area_con_1_1_density.html
+class_area_con_1_1_density-members.html
+class_area_con_1_1_partition.html
+class_area_con_1_1_partition-members.html
+dir_9339b975a20db0474a32b9ade0837470.html
+dir_7589485d74d71d1e2ad072171fed01bf.html
+dir_39967517686e68878aa40e45b7d87239.html
+dir_11aea3a1f26969df23070eb5800d5347.html
+index.html
+namespaces.html
+annotated.html
+classes.html
+functions.html
+functions_func.html
+functions_vars.html
+files.html
+tab_a.png
+tab_b.png
+tab_h.png
+tab_s.png
+nav_h.png
+nav_f.png
+bc_s.png
+doxygen.png
+closed.png
+open.png
+bdwn.png
+sync_on.png
+sync_off.png
+ftv2blank.png
+ftv2doc.png
+ftv2folderclosed.png
+ftv2folderopen.png
+ftv2ns.png
+ftv2mo.png
+ftv2cl.png
+ftv2lastnode.png
+ftv2link.png
+ftv2mlastnode.png
+ftv2mnode.png
+ftv2node.png
+ftv2plastnode.png
+ftv2pnode.png
+ftv2vertline.png
+ftv2splitbar.png

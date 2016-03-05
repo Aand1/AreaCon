@@ -1,0 +1,28 @@
+var class_area_con_1_1_partition =
+[
+    [ "Partition", "class_area_con_1_1_partition.html#aeba48e0f9a00397b57c14c1891f27e15", null ],
+    [ "CalculateError", "class_area_con_1_1_partition.html#a6f60c6e0235d492edb719abfc8f79c12", null ],
+    [ "CalculatePartition", "class_area_con_1_1_partition.html#a7aeef461c6955c41d96765a0b74ec700", null ],
+    [ "CalculateVolumes", "class_area_con_1_1_partition.html#adb5c17c958b4eb6af10690ce1911c37b", null ],
+    [ "CheckParams", "class_area_con_1_1_partition.html#a0a0abf355e39b39ea1291b901c68475c", null ],
+    [ "CleanCovering", "class_area_con_1_1_partition.html#a33c0df65e8a19b7f8bdad79f8d5311af", null ],
+    [ "CreateDefaultCenters", "class_area_con_1_1_partition.html#a2e709e4020147b4211fa1dd56c496111", null ],
+    [ "CreateDefaultCenters", "class_area_con_1_1_partition.html#aa7db4c59243f6b6ebc7d908ce67a9da6", null ],
+    [ "CreateDelaunayGraph", "class_area_con_1_1_partition.html#a52c714e9c48d28476a6555da3aac124d", null ],
+    [ "CreatePowerDiagram", "class_area_con_1_1_partition.html#af66aa27ed612d317c5e5b2bda9eb60ad", null ],
+    [ "GetCenters", "class_area_con_1_1_partition.html#aae59cd87c8ec03b6e179dc9da674f570", null ],
+    [ "GetCovering", "class_area_con_1_1_partition.html#ac7fdbdaea6f40f7951d34155cd27e256", null ],
+    [ "GetWeights", "class_area_con_1_1_partition.html#a0f0027e8bd9d20e8983344166c0efdb6", null ],
+    [ "GradientStepCenter", "class_area_con_1_1_partition.html#acb9e3456544d906c5113662a02f3615c", null ],
+    [ "GradientStepCenter", "class_area_con_1_1_partition.html#ad7d45f5c8dfea17fecd5804e230edc70", null ],
+    [ "GradientStepWeights", "class_area_con_1_1_partition.html#a2a785a25dedf3abdbfb42a751ad0ad14", null ],
+    [ "InitializePartition", "class_area_con_1_1_partition.html#a9b0bf2fe008d4cfd744ea8d870b461ef", null ],
+    [ "SetPartitionVariables", "class_area_con_1_1_partition.html#a9a2349cff697d5cb44cee96645c25d66", null ],
+    [ "Alg_Params", "class_area_con_1_1_partition.html#af15408eb315f8876700313ad849a8b4b", null ],
+    [ "Centers", "class_area_con_1_1_partition.html#a5e152aa6534d8c99b4ad3e2884103d22", null ],
+    [ "Covering", "class_area_con_1_1_partition.html#a6cdeda3e5bcd4cad2ced41897175b4cf", null ],
+    [ "desired_area", "class_area_con_1_1_partition.html#a1107b9e8b5133b2ddfe65a3290ab7ab2", null ],
+    [ "NRegions", "class_area_con_1_1_partition.html#ae35033cda6baa9c8f4e5df3e67c98b92", null ],
+    [ "Prior", "class_area_con_1_1_partition.html#a5b3ee5b4a81ffce8b1b545267523c588", null ],
+    [ "Weights", "class_area_con_1_1_partition.html#a05ac4348457f777af55527eb737d95d6", null ]
+];
