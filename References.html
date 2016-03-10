@@ -43,8 +43,10 @@
 <a id="Primary" class="anchor" href="#Primary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Primary References</h3>
 <p>
 AreaCon is primarily a numerical implementation of the algorithms found in the following:
+</p>
 
 <pre>
+<code>
 @article{RP-PF-RB:13,
   author =	 {R. Patel and P. Frasca and F. Bullo},
   title =	 {Centroidal Area-Constrained Partitioning for Robotic
@@ -70,7 +72,8 @@ AreaCon is primarily a numerical implementation of the algorithms found in the f
                   practical implementation for real mobile networks.
                   Simulation methods are presented and discussed.},
 }
-
+</code>
+<code>
 @InProceedings{RP-PF-FB:13conf,
   author =	 {R. Patel and P. Frasca and F. Bullo},
   title =	 {Centroidal area-constrained partitioning for robotic
@@ -80,11 +83,12 @@ AreaCon is primarily a numerical implementation of the algorithms found in the f
   month =	 October,
   address =	 {Stanford, CA, USA},
   keywords =	 {Robotic Networks},
-}
+}</code>
 </pre>
 
 The algorithms used by AreaCon are also influenced by this work
 <pre>
+<code>
 @article{JC:10,
   author =	 {J. Cort{\'e}s},
   title =	 {Coverage Optimization and Spatial Load Balancing by
@@ -95,69 +99,146 @@ The algorithms used by AreaCon are also influenced by this work
   number =	 3,
   pages =	 {749-754}
 }
+</code>
 </pre>
-
 <h3>
-<a id="Usage" class="anchor" href="#Usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic Usage</h3>
-
-<p>To use AreaCon in your C++ program:
-<ol>
-  <li> Download the AreaCon library using the links at the top of the page.</li>
-  <li> Unzip and extract the files,</li>
-  <li> Place an #include "areacon.hpp" directive at the beginning of your program, and</li>
-  <li> Link your code with "areacon.cpp" and "clipper.cpp" when compiling.</li>
-</ol>
-You can now use AreaCon in your program!
-<br>
-<br>
-AreaCon can be used in a variety of different ways. However, general calls to AreaCon for use in area-constrained partitioning will usually follow these basic steps:
-<ol>
-  <li> Define the region to be partitioned, the number of regions to be used, and the desired areas of the resultant regions</li>
-  <li> Define the density vector (<a href="#Math">discussion</a>)</li>
-  <li> Create and Initialize a partition object, and</li>
-  <li> Call the "CalculatePartition" function.</li>
-</ol>
-That's all there is to it! Note that AreaCon can also be used for a variety of other basic geometric operations, e.g., finding centroids. Detailed source code documentation is included in pdf form with the AreaCon download, or can be found <a href="./Documentation/index.html"> here</a>. Some useful tips and troubleshooting advice can be found on the <a href="faq.html">FAQ</a> page, and more detailed discussion about the functionality of AreaCon can be found on the <a href="https://github.com/jrpeters/AreaCon/wiki"> Wiki</a>.
+<a id="Related" class="anchor" href="#Related" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Related Partitioning Concepts and Problems</h3>
+<p>
+Information regarding basic geometric concepts that commonly appear in partitioning problems can be found here (the literature on partitioning is vast, so this is by no means an exhaustive list):
 </p>
-
+<pre>
+<code>
+@book{AO-BB-KS-SNC:00,
+  author =   {A. Okabe and B. Boots and K. Sugihara and S. N. Chiu},
+  title =    {Spatial Tessellations: Concepts and Applications of
+                  Voronoi Diagrams},
+  publisher =    {Wiley and Sons},
+  year =     2000,
+  series =   {Wiley Series in Probability and Statistics},
+  edition =  2,
+  ISBN =     0471986356,
+}
+</code>
+<code>
+@book{FA-RK-DTL-RK:13,
+  title={Voronoi diagrams and Delaunay triangulations},
+  author={Aurenhammer, F. and Klein, R. and Lee, D.T. and Klein, R.},
+  volume={8},
+  year={2013},
+  publisher={World Scientific}
+}
+</code>
+<code>
+@article{QD-VF-MG:99,
+  author =   {Q. Du and V. Faber and M. Gunzburger},
+  title =    {Centroidal {V}oronoi tessellations: {A}pplications and
+                  algorithms},
+  journal =  {SIAM Review},
+  volume =   41,
+  year =     1999,
+  number =   4,
+  pages =    {637-676},
+}
+</code>
+<code>
+@article{DPB-SMR:15,
+  title={Centroidal Power Diagrams, {L}loyd's Algorithm, and 
+	 Applications to Optimal Location Problems},
+  author={Bourne, D.P. and Roper, S.M.},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={53},
+  number={6},
+  pages={2545--2569},
+  year={2015},
+  publisher={SIAM}
+}
+</code>
+</pre>
+<p>
+A few references regarding relevant partitioning problems in the context of dynamic coverage control in mobile robotics are found here:
+</p>
+<pre>
+<code>
+@article{FB-RC-PF:08u,
+  author =   {F. Bullo and R. Carli and P. Frasca},
+  title =    {Gossip Coverage Control for Robotic Networks:
+                  {D}ynamical Systems on the Space of Partitions},
+  journal =  {SIAM Journal on Control and Optimization,
+  year =     2012,
+  volume =   50,
+  number =   1,
+  pages =    {419-447},
+  keyword =  "Robotic Networks",
+}
+</code>
+<code>
+@article{MP-AA-EF-FB:11,
+  title={Distributed algorithms for environment partitioning in mobile robotic networks},
+  author={Pavone, M. and Arsie, A. and Frazzoli, E. and Bullo, F.},
+  journal={Automatic Control, IEEE Transactions on},
+  volume={56},
+  number={8},
+  pages={1834--1848},
+  year={2011},
+  publisher={IEEE}
+}
+</code>
+<code>
+@article{JGC-EC-RD:12,
+  title={Shadow prices in territory division},
+  author={Carlsson, J.G. and Carlsson, E. and Devulapalli, R.},
+  journal={Networks and Spatial Economics},
+  pages={1--39},
+  year={2012},
+  publisher={Springer}
+}
+</code>
+</pre>
 <h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
+<a id="Numerical" class="anchor" href="#Numerical" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Computer Arithmetic and Numerical Methods</h3>
+<p>
+Information regarding basic geometric concepts that commonly appear in partitioning problems can be found here (the literature on partitioning is vast, so this is by no means an exhaustive list):
+</p>
+<pre>
+<code>
+@book{DRK-EWC:02,
+  title={Numerical Analysis: Mathematics of Scientific Computing},
+  author={Kincaid, D.R. and Cheney, E.W.},
+  volume={2},
+  year={2002},
+  publisher={American Mathematical Society},
+  isbn={9780821847886}
+}
+</code>
+<code>
+@Book{UMA-LRP:98,
+  author =   {U. M. Ascher and L. R. Petzold},
+  title =    {Computer Methods for Ordinary Differential Equations and
+                  Differential-Algebraic Equations},
+  publisher =    SIAM,
+  year =     1998,
+  ISBN =     0898714125,
+}
+</code>
+</pre>
+</section>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a id="Authors" class="anchor" href="#Authors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-<p> The AreaCon library's core components were written and developed by <a href = "http://engineering.ucsb.edu/~jrpeters">Jeffrey R. Peters</a> (@jrpeters), with helpful insight from a variety of people including Amit Surana, William Sisson, Alexander Shilov, Grant Taylor, Terry Turpin, Rush Patel, and Francesco Bullo. The algorithms used by area-con are based primarily off of work by Rush Patel, Paolo Frasca, and Francesco Bullo (see References).</p>
-
-<p> To report a bug, suggest a fix, or contribute to the project, please visit the AreaCon GitHub page. Additional usage examples or code-snippets are also appreciated and can be added to the Wiki page. </p>
-
-<p>Questions or comments can also be sent directly to me via email, but please check the FAQ page and the AreaCon Wiki first to make sure that the issue hasn't already been addressed. 
-I also welcome any general comments or suggestions on how to improve the code.</p>
-
-<h3>
-<a id="Acknowledgments" class="anchor" href="#Acknowledgments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acknowledgments</h3>
-	<p> AreaCon was originally developed as a part of a research effort sponsored by the U.S. Army Research Office and the Regents of the University of California, through Contract Number W911NF-09-D-0001 for the Institute for
-Collaborative Biotechnologies, and that the content of the information does not necessarily reflect the position or the policy of the Government or the Regents of the University of California, and no official endorsement should be inferred.</p>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/jrpeters">Jeffrey R. Peters</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
 <menujeff> 
 <h2> <a href="index.html"> <strong> Home</strong></a></h2>
 <h2> <a href="./Documentation/index.html"> <strong> Documentation</strong></a></h2>
 <h2> <a href="#"> <strong> References</strong></a></h2>
-<ul> <li> <a href = "#About"> About</a></li><br>
-<li> <a href = "#Usage"> Usage</a></li><br>
-<li> <a href = "#Examples"> Examples</a></li><br>
-<li> <a href = "#Authors"> Contributors</a></li><br>
-<li> <a href = "#License"> License</a></li><br>
-<li> <a href = "#Acknowledgments"> Acknowledgements</a></li></ul>
-<h2> <a href="#"> <strong> Links</strong></a></h2>
+<ul> <li> <a href = "#Primary"> Primary References</a></li><br>
+<li> <a href = "#Related"> Related Concepts</a></li><br>
+<li> <a href = "#Numerical"> Numerical Methods</a></li></ul>
+<h2> <a href="Links.html"> <strong> Links</strong></a></h2>
 <h2> <a href="https://github.com/jrpeters/AreaCon/wiki"> <strong> Wiki</strong></a></h2>
-<h2> <a href="#"> <strong> FAQ</strong></a></h2>
-<h2> <a href="#"> <strong> Contact</strong></a></h2>
+<h2> <a href="FAQ.html"> <strong> FAQ</strong></a></h2>
+<h2> <a href="Contact.html"> <strong> Contact</strong></a></h2>
 </menujeff> 
+<footer>
+        <p>Project maintained by <a href="https://github.com/jrpeters">Jeffrey R. Peters</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
 
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->

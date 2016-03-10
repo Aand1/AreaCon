@@ -42,7 +42,7 @@
         <h3>
 <a id="About" class="anchor" href="#About" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About AreaCon.</h3>
 
-AreaCon is a free open source C++ library for performing area-constrained partitioning operations on convex, 2D polygonal regions. It is intended primarily for use in robot and mobile sensor network applications in which the workspace is to be divided among the available agents in an optimal way. AreaCon allows the user to specify the final weighted area of each of the resultant regions, thus providing a natural load-balancing that is useful in a variety of static and dynamic coverage applications, as well as a variety of applications that involve optimal division of workload. Specifically, given a prior density defined over a polygonal region of interest, AreaCon provides a numerical implementation of a theoretically rigorous, bio-inspired algorithm that systematically divides the region into a set of disjoint, convex, and centroidal regions with pre-specified areas. The entire library consists of a single compilation unit (one .hpp and one .cpp file), which has dependence on a single free and open source third party library (the <a href="http://www.angusj.com/delphi/clipper.php"> Polygon Clipper Library</a>). It can therefore be seamlessly integrated into larger, more complex planning codes that require simple load-balancing steps without the weight of a larger computational geometry library. 
+AreaCon is a free open source C++ library for performing area-constrained partitioning operations on convex, 2D polygonal regions. It is intended primarily for use in robot and mobile sensor network applications in which the workspace is to be divided among the available agents in an optimal way. AreaCon allows the user to specify the final weighted area of each of the resultant regions, thus providing a natural load-balancing that is useful in a variety of static and dynamic coverage applications, as well as a variety of applications that involve optimal division of workload. Specifically, given a prior density defined over a polygonal region of interest, AreaCon provides a numerical implementation of a theoretically rigorous, bio-inspired algorithm that systematically divides the region into a set of disjoint, convex, and centroidal regions with pre-specified areas. The entire library consists of a single compilation unit (one .hpp and one .cpp file), which has dependence on a single free and open source third party library (the <a href="http://www.angusj.com/delphi/clipper.php"> Polygon Clipper Library</a>). It can therefore be seamlessly integrated into more complex planning codes that require simple load-balancing steps without the weight of a larger computational geometry library. 
 <br>
 <br>
 <strong> AreaCon v.1</strong> provides the following on planar, convex polygonal environments:
@@ -79,44 +79,115 @@ AreaCon can be used in a variety of different ways. However, general calls to Ar
 That's all there is to it! Note that AreaCon can also be used for a variety of other basic geometric operations, e.g., finding centroids. Detailed source code documentation is included in pdf form with the AreaCon download, or can be found <a href="./Documentation/index.html"> here</a>. Some useful tips and troubleshooting advice can be found on the <a href="faq.html">FAQ</a> page, and more detailed discussion about the functionality of AreaCon can be found on the <a href="https://github.com/jrpeters/AreaCon/wiki"> Wiki</a>.
 </p>
 
-<h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
+I am very interested to learn what type of projects have utilized AreaCon, so please feel free to <a href = "contact.html"> contact me</a> and let me know!
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p><strong> Citing AreaCon:</strong> Please cite AreaCon if wherever possible. For your convenience, a bibtex citation is provided below.</p>
+<pre>
+<code>
+@Misc{AreaCon:16,
+  author =        {J.R. Peters and Contributors},
+  title =         {The {AreaCon} Library},
+  howpublished =  {\texttt{http://www.areacon.org}},
+  year =          {2016},
+  note =          {v. 1},
+  abstract =      {A C++ library for area-constrained partitioning.},
+}
+</code>
+</pre>
+
+
+ 
+
+<h3>
+<a id="Examples" class="anchor" href="#Examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Start Example</h3>
+<p>In-depth discussions about usage including how to create polygons, define prior density functions, choose algorithmic parameters, and initialize partition objects, as well as some helpful numerical examples can be found on the <a href="https://github.com/jrpeters/AreaCon/wiki"> Wiki</a>. However, as a quick-start guide that will illustrate generic usage, we offer the following example.</p>
+
+<p><strong> Partitioning Over a Uniform Prior:</strong> Consider a polygonal region with vertices (0,0), (5,0), (10,5), (10,10), (0,10) and uniform density. Suppose we wanted to partition the region into 3 disjoint sub-regions with relative (weighted) areas 0.2, 0.5, and 0.3. To perform this operation using AreaCon, simply run the following code:
+</p>
+<pre>
+<code>
+//include the AreaCon header
+
+#include areacon.h
+
+using namespace AreaCon;
+
+int main(void){
+
+//Create the polygon to be partitioned (vertices must be listed 
+in counter-clockwise order).
+std::vector vertices = {Point(0,0), Point(5,0), Point(10,5), Point(10,10), Point(0,10)};
+Poly Region(vertices);
+
+//Define the number of regions and the desired areas
+int NRegions = 3;
+std::vector desired_area = {0.2, 0.5, 0.3};
+
+
+//Create a uniform density grid (will be normalized automatically)
+Nx = 100, Ny = 100;
+std::vector values(10000,0.1);
+Density Prior(Region, Nx, Ny, values);
+
+//Create a partition object
+Partition Example_Partition(NRegions, Prior, desired_area);
+
+//Initialize the centers (generators) and weights (Here, we'll use default parameters).
+Example_Partition.InitializePartition();
+
+//Find Partition
+Example_Partition.CalculatePartition(false);
+}
+</code>
+</pre>
+<p>
+That's it!! The resulting partition and generators are then stored in Example_Partition.Covering and Example_Partition.Centers, respectively, and can be accessed using the Partition::GetCovering and Partition::GetCenters functions. A plot of the result is shown below:
+</p>
 
 <h3>
 <a id="Authors" class="anchor" href="#Authors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 <p> The AreaCon library's core components were written and developed by <a href = "http://engineering.ucsb.edu/~jrpeters">Jeffrey R. Peters</a> (@jrpeters), with helpful insight from a variety of people including Amit Surana, William Sisson, Alexander Shilov, Grant Taylor, Terry Turpin, Rush Patel, and Francesco Bullo. The algorithms used by area-con are based primarily off of work by Rush Patel, Paolo Frasca, and Francesco Bullo (see References).</p>
 
-<p> To report a bug, suggest a fix, or contribute to the project, please visit the AreaCon GitHub page. Additional usage examples or code-snippets are also appreciated and can be added to the Wiki page. </p>
+<p> To report a bug, suggest a fix, or contribute to AreaCon, please do so via the <a href = "https://github.com/jrpeters/AreaCon">GitHub page</a>. Contributors are also encouraged to edit the project's <a href="https://github.com/jrpeters/AreaCon/wiki"> Wiki </a>, so as to build as comprehensive of a documentation as possible. Note that contributions can include usage examples or code-snippets that may be useful to other users.</p>
 
-<p>Questions or comments can also be sent directly to me via email, but please check the FAQ page and the AreaCon Wiki first to make sure that the issue hasn't already been addressed. 
-I also welcome any general comments or suggestions on how to improve the code.</p>
+<p>Any issues, questions, or comments can also be sent directly to me via email, but please check the <a href="FAQ.html">FAQ page</a> and the <a href="https://github.com/jrpeters/AreaCon/wiki"> Wiki</a> first to make sure that the issue hasn't already been addressed. I also welcome any general comments or suggestions on how to improve the code, so feel free to pass those along.
+</p>
+<h3>
+<a id="License" class="anchor" href="#License" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h3>
+<p>
+Copyright &copy; 2016. The Regents of the University of California. All rights reserved. Licensed pursuant to the terms and conditions available for viewing <a href = "http://opensource.org/licenses/BSD-3-Clause"> here.</a>
+</p>
+<p>
+The <a href = "http://www.angusj.com/delphi/clipper.php"> Clipper library</a>, as used by AreaCon, is also subject to the following:
+</p>
+<p>
+Copyright &copy; 2016. The Regents of the University of California. Distributed under the Boost Software License, Version 1.0. <a href="http://www.boost.org/LICENSE_1_0.txt"> Terms and Conditions.</a>
+</p>
 
 <h3>
 <a id="Acknowledgments" class="anchor" href="#Acknowledgments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acknowledgments</h3>
 	<p> AreaCon was originally developed as a part of a research effort sponsored by the U.S. Army Research Office and the Regents of the University of California, through Contract Number W911NF-09-D-0001 for the Institute for
 Collaborative Biotechnologies, and that the content of the information does not necessarily reflect the position or the policy of the Government or the Regents of the University of California, and no official endorsement should be inferred.</p>
       </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/jrpeters">Jeffrey R. Peters</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
 <menujeff> 
 <h2> <a href="#"> <strong> Home</strong></a></h2>
 <ul> <li> <a href = "#About"> About</a></li><br>
 <li> <a href = "#Usage"> Usage</a></li><br>
-<li> <a href = "#Examples"> Examples</a></li><br>
+<li> <a href = "#Examples"> Quick Start</a></li><br>
 <li> <a href = "#Authors"> Contributors</a></li><br>
 <li> <a href = "#License"> License</a></li><br>
 <li> <a href = "#Acknowledgments"> Acknowledgements</a></li></ul>
 <h2> <a href="./Documentation/index.html"> <strong> Documentation</strong></a></h2>
 <h2> <a href="References.html"> <strong>References</strong></a></h2>
-<h2> <a href="#"> <strong> Links</strong></a></h2>
+<h2> <a href="Links.html"> <strong> Links</strong></a></h2>
 <h2> <a href="https://github.com/jrpeters/AreaCon/wiki"> <strong> Wiki</strong></a></h2>
-<h2> <a href="#"> <strong> FAQ</strong></a></h2>
-<h2> <a href="#"> <strong> Contact</strong></a></h2>
+<h2> <a href="FAQ.html"> <strong> FAQ</strong></a></h2>
+<h2> <a href="Contact.html"> <strong> Contact</strong></a></h2>
 </menujeff> 
+      <footer>
+        <p>Project maintained by <a href="https://github.com/jrpeters">Jeffrey R. Peters</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
 
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
