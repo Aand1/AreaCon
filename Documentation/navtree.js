@@ -1,6 +1,7 @@
 var NAVTREE =
 [
   [ "The AreaCon Library", "index.html", [
+    [ "AreaCon: A C++ Library for Area-Constrained Partitioning", "index.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ]
     ] ],
