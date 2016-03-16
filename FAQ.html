@@ -38,8 +38,44 @@
         <ul></ul>
       </nav>
       <section>
-        <h3>
-<a id="FAQ" class="anchor" href="#FAQ" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Frequently Asked Questions</h3>
+<h3> Are there any restrictions on who or what projects can use AreaCon?</h3>
+<p> All of the codes contained on this site are open-source, subject to terms specified<a href="http://www.areacon.org#License"> here </a>.</p>
+<h3> How do I cite AreaCon?</h3>
+<p> Please use the bibtex citation found <a href="http://www.areacon.org#Usage"> here</a>.</p>
+<h3> How do I contribute to AreaCon?</h3>
+<p> See <a href="http://www.areacon.org#Authors"> Authors and Contributors</a>.</p>
+
+<h3> AreaCon is taking a very long time or is getting stuck when calculating partitions. How can I speed it up?</h3>
+<h3> Why don't the calculated regions have the correct area?</h3>
+<p> If the algorithm converges, i.e., the script finishes, but the calculated regions do not have the correct area, the most likely culprit is numerical error. As previously mentioned, AreaCon is a numerical implementation of a continuous-time algorithm and thus there are a number of algorithmic parameters that can affect the library's convergence properties. It is important to choose these parameters wisely, based on the particular problem of interest to ensure useful results. For a thorough discussion about choosing appropriate parameters, visit the <a href = "https://github.com/jrpeters/AreaCon/wiki"> Wiki</a>.</p>
+<p>
+Decreasing the parameters "volume_tolerance" and "convergence_criterion", while simultaneously increasing "max_iterations_volume" will usually fix accuracy issues. Note however, that it may also be necessary to decrease "weights_step" upon adjusting the aforementioned parameters to maintain numerical stability. Using finer density grids can also sometimes help (increasing "Nx" and "Ny").</p>
+<h3> Can I use AreaCon to calculate a partition of a non-convex region?</h3>
+<p>
+Possibly...AreaCon is not explicitly designed for use with non-convex regions. If a partitioning operation is initialized directly with a non-convex region, AreaCon may or may not produce a valid solution.</p>
+
+<p> However, the prior density function that is used is not required to be non-zero over the entire convex region. Therefore, an alternative approach to partitioning of a non-convex region would be to bound the region with a (convex) bounding box, specify the box as the partitioning area, and create a prior density that is zero at every grid point that is not located in the original non-convex region. Using the result, a partition of the non-convex region can be created by intersecting each region resulting from the bounding box partition. Note, however, that this method may cause oddly shaped or disconnected regions, and may produce centers that do not actually lie in the region.</p> 
+<h3> The partitioning operation seems to produce large regions where the density is high, and small regions where the density is low. Is this right?</h3>
+<p>
+This could be correct if the desired areas are unbalanced. For example, if the partition has only 2 regions with specified desired areas of, say, 0.1 and 0.9, then this sort of behavior is certainly possible. 
+</p>
+<p>
+The more likely scenario, however, is that the density vector is not oriented correctly. That is, the entries of Density::Values are not aligned with what was intended. The values should be stored so that the value of the prior density at the (i,j)th grid point appears in Density::Values[Ny*i+j]. See the <a href = "https://github.com/jrpeters/AreaCon/wiki"> Wiki</a> for a more thorough discussion. </p>
+
+<h3> Does AreaCon have any built-in tools for creating/correctly orienting standard prior density functions, e.g., Gaussians?</h3>
+<p>
+The current version of AreaCon, unfortunately, does not contain explicit functions for creating density vectors. This is a potential addition to future versions. 
+</p>
+<p>
+However, there are a number of freely available libraries (that are not explicitly associated with AreaCon) that contain tools for creating and working with probability density functions, especially those based on common distributions. It is relatively straightforward to utilize these, or other methods, to create a properly oriented density grid for use with AreaCon (see <a href = "https://github.com/jrpeters/AreaCon/wiki"> Wiki</a>).   
+</p>
+
+<h3> Is there a way to visualize the results of the partitioning operation?</h3>
+<p>
+The current version of AreaCon does not contain built-in functions for creating images or video. This is a potential addition to future versions. For now, AreaCon does contain functions that will write the results of partitioning operations (and the underlying density function) to text files. Using these files, it is straightforward to write scripts  in other platforms (Matlab, for example) to read in the data and plot the result. 
+</p>
+
+
 
 </section>
 <menujeff> 
