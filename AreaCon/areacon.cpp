@@ -1052,7 +1052,8 @@ namespace AreaCon {
             }
             
             if(Covering[ii].GetNVertices() == 0){
-                Weights[ii] +=Alg_Params.weights_step*2;
+                Weights = std::vector<double>(NRegions,0);
+                return;
             }else{
                 Weights[ii] += - totals[ii]*Alg_Params.weights_step;
             }

@@ -363,7 +363,7 @@ namespace AreaCon {
          * @param[in] Volume_Lower_Bound A lower bound on the weighted area of each region
          * @param[in] Robustness_Constant A constant used to enhace numerical robustness (see Point class)
          */
-        Parameters(const double line_int_step = 0.1,const double weights_step = 0.1, const double centers_step = 1,const double volume_tolerance = 0.005, const double convergence_criterion = 0.02, const int max_iterations_volume = 500, const int max_iterations_centers = 500, const double Volume_Lower_Bound = 10e-6, const double Robustness_Constant = 10e-8);
+        Parameters(const double line_int_step = 0.1,const double weights_step = 0.1, const double centers_step = 1,const double volume_tolerance = 0.005, const double convergence_criterion = 0.02, const int max_iterations_volume = 200, const int max_iterations_centers = 500, const double Volume_Lower_Bound = 10e-6, const double Robustness_Constant = 10e-8);
         //@}
         //@{
         const double line_int_step;/**<Spacing parameter used for calculating line integrals*/
