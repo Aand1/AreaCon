@@ -1,6 +1,8 @@
 # AreaCon
 A C++ library for area-constrained partitioning, written by Jeffrey R. Peters
 
+<p align ="center"><img src = "https://github.com/jrpeters/AreaCon/blob/gh-pages/images/sample.png" height = "300 px"></img></p>
+
 ##About
 AreaCon is a light-weight, C++ library for carrying out area-constrained partitioning operations in floating-point precision. The library is primarily a numerical implementation of the area-constrained partitioning algorithm by Patel, Frasca, and Bullo, 2014 [[Reference](http://www.areacon.org/References)].
 
