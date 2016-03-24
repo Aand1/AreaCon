@@ -9,7 +9,7 @@ var class_area_con_1_1_partition =
     [ "CreateDefaultCenters", "class_area_con_1_1_partition.html#a2e709e4020147b4211fa1dd56c496111", null ],
     [ "CreateDefaultCenters", "class_area_con_1_1_partition.html#aa7db4c59243f6b6ebc7d908ce67a9da6", null ],
     [ "CreateDelaunayGraph", "class_area_con_1_1_partition.html#a52c714e9c48d28476a6555da3aac124d", null ],
-    [ "CreatePowerDiagram", "class_area_con_1_1_partition.html#af66aa27ed612d317c5e5b2bda9eb60ad", null ],
+    [ "CreatePowerDiagram", "class_area_con_1_1_partition.html#acf148d6d9ae661baa71d605ae4d3b6c1", null ],
     [ "GetCenters", "class_area_con_1_1_partition.html#aae59cd87c8ec03b6e179dc9da674f570", null ],
     [ "GetCovering", "class_area_con_1_1_partition.html#ac7fdbdaea6f40f7951d34155cd27e256", null ],
     [ "GetWeights", "class_area_con_1_1_partition.html#a0f0027e8bd9d20e8983344166c0efdb6", null ],
