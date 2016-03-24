@@ -52,7 +52,7 @@ namespace AreaCon {
     Point Point::FindPerpDirection(const Point Test1, const Point Test2, const double Norm){
         double distance = Distance(Test1, Test2);
         if (distance == 0){
-            return Point(0,0);
+            return Point(Norm,Norm);
         }else{
             return Point((Test2.y-Test1.y)/distance*Norm, (Test1.x-Test2.x)/distance*Norm);
         }
@@ -740,14 +740,14 @@ namespace AreaCon {
         }
         Covering = temp;
     }
-    void Partition::CreatePowerDiagram(void){
+    bool Partition::CreatePowerDiagram(void){
         double minx, maxx,miny, maxy = 0;
         Prior.GetExtrema(minx, miny, maxx, maxy);
         Poly Region = Prior.GetRegion();
         int NPoly = Region.GetNVertices(), count = 0;
         std::vector<Point> Vertices = Region.GetVertices();
         Point Test, p1, p2, p3, p4, p5, p6;
-        double value1,previousvalue1 = 0, value2,previousvalue2 = 0, error;
+        double value1,previousvalue1 = 0, value2,previousvalue2 = 0, error, distance = 0;
         double tolerance = Alg_Params.Robustness_Constant, testvalue;
         long double increment;
         bool flag2 = false, whichpoly = false;
@@ -774,7 +774,7 @@ namespace AreaCon {
                     increment = 1;
                     flag2 = false;
                     error = INFINITY;
-                    while (count<10000){
+                    while (count<100){
                         Test = Point::FindPointAlongLine(Centers[ii], Centers[jj], testvalue);
                         value1 = pow(Point::Distance(Centers[ii], Test),2) - Weights[ii];
                         value2 = pow(Point::Distance(Centers[jj], Test),2) - Weights[jj];
@@ -817,9 +817,30 @@ namespace AreaCon {
                     }
                     //Split the polygon into two sections
                     increment = 1;
+                    count = 0;
+                    distance = Point::Distance(Test, Centers[ii]);
+                    while (distance == 0){
+                        p1 = Centers[ii].AddPoint(Point(0,100*Alg_Params.Robustness_Constant));
+                        if(!Prior.GetRegion().pnpoly(p1)){
+                            p1 = Centers[ii].AddPoint(Point(100,-2*Alg_Params.Robustness_Constant));
+                            if(!Prior.GetRegion().pnpoly(p1)){
+                                p1 = Centers[ii].AddPoint(Point(100*Alg_Params.Robustness_Constant,0));
+                                if(!Prior.GetRegion().pnpoly(p1)){
+                                    p1 = Centers[ii].AddPoint(Point(-100*Alg_Params.Robustness_Constant,0));
+                                    if(!Prior.GetRegion().pnpoly(p1)){
+                                        throw std::runtime_error("Error: Try decreasing Parameters::weights_step");
+                                    }
+                                }
+                            }
+                        }
+                        Centers[ii] = p1;
+                        std::cout<<"Warning:May be numerically unstable. Suggest using smaller stepsizes or a finer grid."<<std::endl;
+                        return false;
+                    }
                     while (true){
-                        p1 = Test.AddPoint(Point::FindPerpDirection(Test, Centers[ii], Point::Distance(Test, Centers[ii])*increment));
-                        p2 =Test.AddPoint(Point::FindPerpDirection(Test, Centers[ii], Point::Distance(Test, Centers[ii])*-increment));
+                        
+                        p1 = Test.AddPoint(Point::FindPerpDirection(Test, Centers[ii], distance*increment));
+                        p2 =Test.AddPoint(Point::FindPerpDirection(Test, Centers[ii], distance*-increment));
                         if ((p1.x<minx && p2.x>maxx)||(p1.x>maxx && p2.x<minx)){
                             p3.x = p1.x;
                             p4.x = p2.x;
@@ -847,9 +868,10 @@ namespace AreaCon {
                         }else {
                             increment = increment*2;
                         }
-                        if (count >10000){
+                        if (count >100){
                             increment = increment * 500;
                         }
+                        count++;
                     }
                     //Test to see which polygon is of relevance
                     temp = {p3, p4, p2, p1};
@@ -893,6 +915,7 @@ namespace AreaCon {
             
         }
         CleanCovering((double) 1.0/mult, mult);
+        return true;
         
     }
     
@@ -1002,13 +1025,18 @@ namespace AreaCon {
         Point Center, Center_ii, Errorxy;
         double Error = 0;
         for (int ii = 0; ii<NRegions;ii++){
-            Center_ii = Centers[ii];
-            Center_ii.FlipDirection();
-            Center = Prior.CalculateCentroid(Covering[ii], volumes[ii]);
-            Errorxy = Point::AddPoints(Center, Center_ii);
-            Error+=Errorxy.Norm();
-            Errorxy.Mult(Alg_Params.centers_step);
-            Centers[ii] = Centers[ii].AddPoint(Errorxy);
+            if (Covering[ii].GetNVertices() == 0){
+                Errorxy = INFINITY;
+                Error+=Errorxy.Norm();
+            }else{
+                Center_ii = Centers[ii];
+                Center_ii.FlipDirection();
+                Center = Prior.CalculateCentroid(Covering[ii], volumes[ii]);
+                Errorxy = Point::AddPoints(Center, Center_ii);
+                Error+=Errorxy.Norm();
+                Errorxy.Mult(Alg_Params.centers_step);
+                Centers[ii] = Centers[ii].AddPoint(Errorxy);
+            }
             
         }
         
@@ -1020,8 +1048,10 @@ namespace AreaCon {
         }
         Point Center;
         for (int ii = 0; ii<NRegions;ii++){
+            if (Covering[ii].GetNVertices() > 0){
             Center = Prior.CalculateCentroid(Covering[ii], volumes[ii]);
             Centers[ii]=Point::FindPointAlongLine(Centers[ii], Center, temp_step);
+            }
         }
     }
     void Partition::GradientStepWeights(const std::vector<double> &volumes, const DelaunayGraph &SharedEdges){
@@ -1081,6 +1111,7 @@ namespace AreaCon {
         }else if (Centers.empty()){
             throw std::runtime_error("Centers and Weights have not been initialized");
         }
+        bool success;
         std::ofstream file1, file2;
         int count1, count2;
         std::vector<double> volumes(NRegions);
@@ -1103,7 +1134,11 @@ namespace AreaCon {
             file1<<std::endl;
             file2<<std::endl;
         }
-        CreatePowerDiagram();
+        
+        success = CreatePowerDiagram();
+        while (!success){
+            success = CreatePowerDiagram();
+        }
         if (WriteToFile){
             for (int ii = 0; ii<NRegions;ii++){
                 file1<<Centers[ii].x<<","<<Centers[ii].y<<std::endl;
@@ -1118,7 +1153,10 @@ namespace AreaCon {
         }
         volumes = CalculateVolumes();
         GradientStepCenter(initial_step, volumes);
-        CreatePowerDiagram();
+        success = CreatePowerDiagram();
+        while (!success){
+            success = CreatePowerDiagram();
+        }
         if (WriteToFile){
             for (int ii = 0; ii<NRegions;ii++){
                 file1<<Centers[ii].x<<","<<Centers[ii].y<<std::endl;
@@ -1135,13 +1173,15 @@ namespace AreaCon {
         while (error>Alg_Params.convergence_criterion && count2<Alg_Params.max_iterations_centers){
             volumes = CalculateVolumes();
             error_vol = CalculateError(volumes);
-            
             std::cout<<error_vol<<std::endl;
             count1 = 0;
             while (error_vol >Alg_Params.volume_tolerance &&count1<Alg_Params.max_iterations_volume){
                 CreateDelaunayGraph(Delaunay);
                 GradientStepWeights(volumes, Delaunay);
-                CreatePowerDiagram();
+                success = CreatePowerDiagram();
+                while (!success){
+                    success = CreatePowerDiagram();
+                }
                 if (WriteToFile){
                     for (int ii = 0; ii<NRegions;ii++){
                         file1<<Centers[ii].x<<","<<Centers[ii].y<<std::endl;
@@ -1156,13 +1196,31 @@ namespace AreaCon {
                 }
                 volumes = CalculateVolumes();
                 error_vol = CalculateError(volumes);
+                for (int ii = 0;ii<NRegions;ii++){
+                    std::cout<<Weights[ii]<<std::endl;
+                }
+
                 std::cout<<count1<<std::endl;
                 std::cout<<error_vol<<std::endl;
                 count1++;
             }
             error = GradientStepCenter(volumes);
+            
+            std::cout<<count2<<std::endl;
             std::cout<<error<<std::endl;
-            CreatePowerDiagram();
+            
+            
+            if (isinf(error)){
+                Weights = std::vector<double>(NRegions,0);
+            }
+            
+            
+            
+            success = CreatePowerDiagram();
+            while (!success){
+                success = CreatePowerDiagram();
+                
+            }
             if (WriteToFile){
                 for (int ii = 0; ii<NRegions;ii++){
                     file1<<Centers[ii].x<<","<<Centers[ii].y<<std::endl;
@@ -1177,6 +1235,9 @@ namespace AreaCon {
             }
             count2++;
         }
+        
+        
+        
         if (WriteToFile){
             for (int ii = 0; ii<NRegions;ii++){
                 file1<<Centers[ii].x<<","<<Centers[ii].y<<std::endl;
