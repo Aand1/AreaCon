@@ -475,6 +475,9 @@ namespace AreaCon {
          * @return Volume_Lower_Bound;
          */
         double GetVolumeLowerBound(void);
+        
+        void WriteToFile(const std::string filename)const;
+
     private:
         Poly Region;/**<The region of interest*/
         int Nx;/**<The number of grid points in the x direction*/

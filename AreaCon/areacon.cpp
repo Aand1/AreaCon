@@ -640,6 +640,19 @@ namespace AreaCon {
             }
         }
     }
+    
+    void Density::WriteToFile(const std::string filename)const{
+        std::ofstream file1;
+        file1.open(filename);
+        
+        file1<<minx<<std::endl<<maxx<<std::endl<<miny<<std::endl<<maxy<<std::endl;
+        for (int ii = 0;ii<Values.size();ii++){
+            file1<<Values[ii]<<std::endl;
+        }
+        file1.close();
+        
+    }
+
     // Partition Class--------------------------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------------------------------------------
     Partition::Partition(int NRegions, Density Prior, std::vector<double> desired_area, Parameters Alg_Params):NRegions(NRegions), Prior(Prior), desired_area(desired_area), Alg_Params(Alg_Params){Point::Robustness_Constant = Alg_Params.Robustness_Constant; CheckParams();}
