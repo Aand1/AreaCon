@@ -46,6 +46,17 @@
 <p> See <a href="http://www.areacon.org#Authors"> Authors and Contributors</a>.</p>
 
 <h3> AreaCon is taking a very long time or is getting stuck when calculating partitions. How can I speed it up?</h3>
+
+<p> The performance of AreaCon, i.e., convergence speed, is dependent upon a variety of factors including, but not limited to, the number of regions used, the size of the polygon of interest, the nature of the underlying density function, and the degree of accuracy required. For a given problem setup, performance can be optimized by adjusting algorithmic parameters. </p>
+<p>
+If AreaCon is taking an unreasonably long time, it is usually an indicator of poor parameter choice. For tips and in-depth information about choosing parameters wisely, see the discussion on the <a href="https://github.com/jrpeters/AreaCon/wiki/Usage">Wiki</a>.
+</p>
+<p>
+Occasionally, the problem scaling can also cause poor performance. AreaCon operates best over length scales on the order of ones or tens, so it is usually beneficial to scale problem dimensions to be on this order of magnitude. Mismatches in length scales, e.g., densities with both coarse and fine level features, should also be avoided if possible. 
+</p>
+<p> If none of the adjustments mentioned result in reasonable performance, it may be necessary to consider manipulating the problem structure, e.g., choose fewer regions, a smaller area, or a different density function.
+</p> 
+
 <h3> Why don't the calculated regions have the correct area?</h3>
 <p> If the algorithm converges, i.e., the script finishes, but the calculated regions do not have the correct area, the most likely culprit is numerical error. As previously mentioned, AreaCon is a numerical implementation of a continuous-time algorithm and thus there are a number of algorithmic parameters that can affect the library's convergence properties. It is important to choose these parameters wisely, based on the particular problem of interest to ensure useful results. For a thorough discussion about choosing appropriate parameters, visit the <a href = "https://github.com/jrpeters/AreaCon/wiki"> Wiki</a>.</p>
 <p>
